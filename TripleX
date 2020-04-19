@@ -1,4 +1,4 @@
-include <iostream>
+#include <iostream>
 #include <ctime> // Library that is required for using time
 
 // Function which is used for displaying introduction message to player
