@@ -1,0 +1,90 @@
+include <iostream>
+#include <ctime> // Library that is required for using time
+
+// Function which is used for displaying introduction message to player
+void PrintIntroduction(int Difficulty)
+{
+    //Printing the welcome message in the terminal
+    std::cout << "\n\nYou are one of the hackers breaking into a " << Difficulty;
+    std::cout << " secured server..!!\nYou will advance through different levels if you are able to find the security code..!!"; 
+    std::cout << "\nYou must enter the correct codes to continue..!!\n\n";
+}
+
+// Fucntion which is used for increase difficulty if player enters right code
+bool PlayGame(int Difficulty)
+{
+    PrintIntroduction(Difficulty);
+
+    //Declaring 3 constant variables 
+    const int CodeA = rand() % Difficulty + Difficulty + Difficulty + Difficulty;
+    const int CodeB = rand() % Difficulty + Difficulty + Difficulty + Difficulty;
+    const int CodeC = rand() % Difficulty + Difficulty + Difficulty + Difficulty;
+    
+    //Sum and Product of  3 random numbers
+    const int CodeSum = CodeA + CodeB + CodeC;
+    const int CodeProduct= CodeA * CodeB * CodeC;
+
+    //Printing the CodeSum and CodeProduct of 3 constant variables in the terminal
+    std::cout << std::endl;
+    std::cout << "+ There are 3 numbers in the security code!!"; 
+    std::cout << "\n+ The security code adds upto: " << CodeSum;
+    std::cout << "\n+ The security code multiplies to give: " << CodeProduct << std::endl;
+
+    //Store player guess
+    int GuessA,GuessB,GuessC;
+    std::cin >> GuessA >> GuessB >> GuessC;
+    
+    // Sum and Product of player's guess
+    int GuessSum = GuessA + GuessB + GuessC;
+    int GuessProduct = GuessA * GuessB * GuessC;
+
+    //Check if player guess is correct
+    if (GuessSum == CodeSum && GuessProduct == CodeProduct)
+    {
+        //Statement below is displayed if player finds the correct code
+        std::cout << "\n--- Nicely done hacker! You have successfully access to this file! Onto next one! ---";
+        return true;
+    }
+    else
+    {
+        //Statement below is displayed if players can't find the correct code
+        std::cout <<"\n--- Ah dang it! You have been caught due to entering wrong code! Try again!";
+        return false;
+    }
+
+}
+
+
+
+int main()
+{
+    //Generates number according to time
+    srand(time(NULL)); //Create new random sequence based on time of the day
+
+    //Difficulty starts from 1 and ends at 10
+    int LevelDifficulty = 1;
+    const int MaxDifficulty = 10;
+    while (LevelDifficulty <= MaxDifficulty) //Loop the game until all levels completed 
+    
+    {
+        
+        bool  bLevelComplete = PlayGame(LevelDifficulty);//Shows the difficulty in the introduction message
+        std::cin.clear(); //Clears any Error
+        std::cin.ignore(); //Discards the buffer
+    
+    //Fucntion for increasing difficulty
+        if (bLevelComplete)
+        {
+            //Increase level difficulty
+            ++LevelDifficulty;
+        }
+        
+
+    }
+
+    //Statement below is showed if player is able to complete all the values
+    std::cout << "\n --- Nicely done hacker! You were able to access all the files! No.1 hacker indeed! ---\n";
+
+    //Stops the execution and returns null
+    return 0;
+}
