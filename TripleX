@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ctime> // Library that is required for using time
+#include <ctime> // Library that contains definitions of functions to get and manipulate date and time information.
 
 // Function which is used for displaying introduction message to player
 void PrintIntroduction(int Difficulty)
